@@ -1,5 +1,12 @@
+import { Outlet } from 'react-router-dom'
+import GeneralLayout from './layout/GeneralLayout'
+
 function App() {
-  return <div className='App'>app</div>
+  return (
+    <GeneralLayout>
+      <Outlet />
+    </GeneralLayout>
+  )
 }
 
 export default App
