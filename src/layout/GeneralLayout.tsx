@@ -1,21 +1,34 @@
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { GeneralLayoutContainer } from './GeneralLayout.style'
+import { getAccessTokenFromLocalStorage } from '../utils/accessTokenHandler'
 
 interface GeneralLayoutProps {
   children: React.ReactNode
 }
 
 const GeneralLayout: React.FC<GeneralLayoutProps> = ({ children }) => {
-  // TODO:
-  // 로그인 여부 체크
-  // 로컬스토리지에 토큰이 있는 상태면
-  // ㄴ /signin or /signup => /todo
-  // ㄴ /todo => /todo
-  // 로컬스토리지에 토큰이 없는 상태면
-  // ㄴ /signin => /signin
-  // ㄴ /signup => /signup
-  // ㄴ /todo => /signin
+  const [isLoading, setIsLoading] = useState(true)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
-  return <GeneralLayoutContainer>{children}</GeneralLayoutContainer>
+  console.log(`layout ${pathname}`)
+  // TODO: 주석 제거, 토큰을 context로 관리할지 말지 정하기
+
+  useEffect(() => {
+    if (getAccessTokenFromLocalStorage()) {
+      if (pathname === '/signin' || pathname === '/signup') {
+        navigate('/todo')
+      }
+    } else {
+      if (pathname === '/todo') {
+        navigate('/signin')
+      }
+    }
+    setIsLoading(false)
+  }, [pathname, navigate])
+
+  return <GeneralLayoutContainer>{isLoading ? '로딩중' : children}</GeneralLayoutContainer>
 }
 
 export default GeneralLayout
