@@ -47,6 +47,14 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+html {
+  font: 400 62.5%/1.4 'Spoqa Han Sans Neo', sans-serif;
+}
+body {
+  font-size:1.6rem;
+  color: #152766;
+  background: #f7f7f7;
+}
 `
 
 export default GlobalStyles
