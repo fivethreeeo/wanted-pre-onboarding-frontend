@@ -51,7 +51,7 @@ html {
   font: 400 62.5%/1.4 'Spoqa Han Sans Neo', sans-serif;
 }
 body {
-  font-size:1.6rem;
+  font-size:1.4rem;
   color: #152766;
   background: #f7f7f7;
 }
