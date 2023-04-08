@@ -15,11 +15,20 @@ const SignForm = ({ title, handleSubmit }: SignFormProps) => {
     password: false,
   })
 
+  const isValidated = {
+    text: (value: string) => value.includes('@'),
+    password: (value: string) => value.length >= 8,
+  }
+
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { type, value } = target
-    console.log(type, value)
-    // TODO: Input (text, password) 유효성 검사 결과에 따라
-    // setIsValid 상태 변경 & SignButton disabled 상태 변경
+
+    const currentIsValid = isValid[type as SignInputType]
+    const nextIsValid = isValidated[type as SignInputType](value)
+
+    if (currentIsValid !== nextIsValid) {
+      setIsValid({ ...isValid, [type]: nextIsValid })
+    }
   }
 
   return (
