@@ -7,7 +7,6 @@ import TodoItem from '../components/TodoItem'
 
 const getTodos = async () => {
   const response = await fetch('https://www.pre-onboarding-selection-task.shop/todos', {
-    // TODO: api 엔드포인트 변경 필요
     method: 'GET',
     headers: {
       Authorization: `Bearer ${getAccessTokenFromLocalStorage()}`,
@@ -17,9 +16,8 @@ const getTodos = async () => {
   return todos
 }
 
-const addTodo = async (text: string) => {
-  await fetch('https://www.pre-onboarding-selection-task.shop/todos', {
-    // TODO: api 엔드포인트 변경 필요
+const addTodo = async (text: string): Promise<TodoType> => {
+  const addTodoRes = await fetch('https://www.pre-onboarding-selection-task.shop/todos', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,6 +27,9 @@ const addTodo = async (text: string) => {
       todo: text,
     }),
   })
+
+  return addTodoRes.json()
+}
 }
 
 const Todo = () => {
@@ -38,7 +39,8 @@ const Todo = () => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const text = formData.get('text') as string
-    addTodo(text).then(() => getTodos().then(res => setTodos(res)))
+    addTodo(text).then(res => setTodos([...todos, res]))
+  }
   }
 
   useEffect(() => {
