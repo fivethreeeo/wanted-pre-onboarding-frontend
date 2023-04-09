@@ -6,18 +6,21 @@ import SignIn from '../pages/SignIn'
 import SignUp from '../pages/SignUp'
 import Todo from '../pages/Todo'
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <NotFound />,
-    children: [
-      { index: true, element: <Navigate to='/signin' /> },
-      { path: '/signin', element: <SignIn /> },
-      { path: '/signup', element: <SignUp /> },
-      { path: '/todo', element: <Todo /> },
-    ],
-  },
-])
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      errorElement: <NotFound />,
+      children: [
+        { index: true, element: <Navigate to='/signin' /> },
+        { path: '/signin', element: <SignIn /> },
+        { path: '/signup', element: <SignUp /> },
+        { path: '/todo', element: <Todo /> },
+      ],
+    },
+  ],
+  { basename: process.env.PUBLIC_URL }
+)
 
 export default router
