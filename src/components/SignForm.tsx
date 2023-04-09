@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SignFormContainer, Heading } from './SignForm.style'
+import { SignFormContainer, Heading } from './Sign.style'
 import { SignTitleType, SignInputType } from '../types/sign'
 import SignButton from './SignButton'
 import SignInput from './SignInput'

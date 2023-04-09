@@ -1,4 +1,4 @@
-import { Button } from './SignForm.style'
+import { Button } from './Sign.style'
 import { SignTitleType } from '../types/sign'
 import { TestIdSignButtonType } from '../types/testid'
 

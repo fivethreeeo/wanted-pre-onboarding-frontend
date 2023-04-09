@@ -1,4 +1,4 @@
-import { Input } from './SignForm.style'
+import { Input } from './Sign.style'
 import { SignInputType } from '../types/sign'
 import { TestIdSignInputType } from '../types/testid'
 
