@@ -16,9 +16,18 @@ const TodoItem = ({ item, handleDelete, handleUpdate }: TodoItemProps) => {
   const [isChecked, setIsChecked] = useState(isCompleted)
   const [modifiedInput, setModifiedInput] = useState(todo)
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
-    setModifiedInput(value)
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target
+    setIsChecked(checked)
+    handleUpdate(id, modifiedInput, checked)
+  }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setModifiedInput(event.target.value)
+
+  const handleModifySumbitClick = () => {
+    setIsModifyMode(false)
+    handleUpdate(id, modifiedInput, isChecked)
   }
 
   const handleCancelClick = () => {
@@ -26,17 +35,12 @@ const TodoItem = ({ item, handleDelete, handleUpdate }: TodoItemProps) => {
     setModifiedInput(todo)
   }
 
+  const handleModifyClick = () => setIsModifyMode(true)
+  const handleDeleteClick = () => handleDelete(id)
+
   return isModifyMode ? (
     <Item>
-      <InputCheckbox
-        type='checkbox'
-        checked={isChecked}
-        onChange={() => {
-          const nextIsChecked = !isChecked
-          setIsChecked(nextIsChecked)
-          handleUpdate(id, modifiedInput, nextIsChecked)
-        }}
-      />
+      <InputCheckbox type='checkbox' checked={isChecked} onChange={handleCheckboxChange} />
       <InputText
         type='text'
         data-testid='modify-input'
@@ -44,33 +48,19 @@ const TodoItem = ({ item, handleDelete, handleUpdate }: TodoItemProps) => {
         onChange={handleInputChange}
       />
       <ButtonWrap>
-        <TodoButton
-          title='제출'
-          handleClick={() => {
-            setIsModifyMode(false)
-            handleUpdate(id, modifiedInput, isChecked)
-          }}
-        />
+        <TodoButton title='제출' handleClick={handleModifySumbitClick} />
         <TodoButton title='취소' handleClick={handleCancelClick} />
       </ButtonWrap>
     </Item>
   ) : (
     <Item>
       <Label>
-        <InputCheckbox
-          type='checkbox'
-          checked={isChecked}
-          onChange={() => {
-            const nextIsChecked = !isChecked
-            setIsChecked(nextIsChecked)
-            handleUpdate(id, modifiedInput, nextIsChecked)
-          }}
-        />
+        <InputCheckbox type='checkbox' checked={isChecked} onChange={handleCheckboxChange} />
         <Text>{todo}</Text>
       </Label>
       <ButtonWrap>
-        <TodoButton title='수정' handleClick={() => setIsModifyMode(true)} />
-        <TodoButton title='삭제' handleClick={() => handleDelete(id)} />
+        <TodoButton title='수정' handleClick={handleModifyClick} />
+        <TodoButton title='삭제' handleClick={handleDeleteClick} />
       </ButtonWrap>
     </Item>
   )
