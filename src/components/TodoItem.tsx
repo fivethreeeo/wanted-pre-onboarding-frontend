@@ -14,12 +14,17 @@ const TodoItem = ({ id, isCompleted, todo, userId }: TodoType) => {
     setModifiedInput(value)
   }
 
+  const handleCancelClick = () => {
+    setIsModifyMode(false)
+    setModifiedInput(todo)
+  }
+
   return isModifyMode ? (
     <Item>
       <InputText type='text' value={modifiedInput} onChange={handleInputChange} />
       <ButtonWrap>
         <TodoButton title='제출' handleClick={() => console.log('클릭 제출')} />
-        <TodoButton title='취소' handleClick={() => setIsModifyMode(false)} />
+        <TodoButton title='취소' handleClick={handleCancelClick} />
       </ButtonWrap>
     </Item>
   ) : (
