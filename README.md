@@ -11,7 +11,7 @@ npm run start
 
 ## 배포 링크
 
-https://sangbeomheo.github.io/wanted-pre-onboarding-frontend/todo
+https://sangbeomheo.github.io/wanted-pre-onboarding-frontend/
 
 <br>
 
