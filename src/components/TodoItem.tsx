@@ -11,7 +11,6 @@ interface TodoItemProps {
 
 const TodoItem = ({ item, handleDelete, handleUpdate }: TodoItemProps) => {
   const { id, isCompleted, todo } = item
-  console.log(id, isCompleted, todo)
 
   const [isModifyMode, setIsModifyMode] = useState(false)
   const [isChecked, setIsChecked] = useState(isCompleted)
@@ -38,7 +37,12 @@ const TodoItem = ({ item, handleDelete, handleUpdate }: TodoItemProps) => {
           handleUpdate(id, modifiedInput, nextIsChecked)
         }}
       />
-      <InputText type='text' value={modifiedInput} onChange={handleInputChange} />
+      <InputText
+        type='text'
+        data-testid='modify-input'
+        value={modifiedInput}
+        onChange={handleInputChange}
+      />
       <ButtonWrap>
         <TodoButton
           title='제출'
