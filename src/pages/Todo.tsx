@@ -6,7 +6,7 @@ import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
 
 const getTodos = async () => {
-  const response = await fetch('http://localhost:8000/todos', {
+  const response = await fetch('https://www.pre-onboarding-selection-task.shop/todos', {
     // TODO: api 엔드포인트 변경 필요
     method: 'GET',
     headers: {
@@ -18,7 +18,7 @@ const getTodos = async () => {
 }
 
 const addTodo = async (text: string) => {
-  await fetch('http://localhost:8000/todos', {
+  await fetch('https://www.pre-onboarding-selection-task.shop/todos', {
     // TODO: api 엔드포인트 변경 필요
     method: 'POST',
     headers: {

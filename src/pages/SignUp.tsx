@@ -10,7 +10,7 @@ type SignUpResult = 'success' | 'fail'
 
 const signup = async (args: SignUpRequest): Promise<SignUpResult> => {
   // TODO: api 엔드포인트 변경 필요
-  const signUpRes = await fetch('http://localhost:8000/auth/signup', {
+  const signUpRes = await fetch('https://www.pre-onboarding-selection-task.shop/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
