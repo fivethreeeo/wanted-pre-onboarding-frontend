@@ -14,7 +14,6 @@ const GeneralLayout: React.FC<GeneralLayoutProps> = ({ children }) => {
 
   useEffect(() => {
     if (getAccessTokenFromLocalStorage()) {
-      console.log(`hasToken ${pathname}`)
       ;(pathname === '/' || pathname === '/signin' || pathname === '/signup') && navigate('/todo')
     } else {
       pathname === '/todo' && navigate('/signin')
