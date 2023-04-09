@@ -17,11 +17,28 @@ const getTodos = async () => {
   return todos
 }
 
+const addTodo = async (text: string) => {
+  await fetch('http://localhost:8000/todos', {
+    // TODO: api 엔드포인트 변경 필요
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getAccessTokenFromLocalStorage()}`,
+    },
+    body: JSON.stringify({
+      todo: text,
+    }),
+  })
+}
+
 const Todo = () => {
   const [todos, setTodos] = useState<TodoType[]>([])
 
   const todoSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const text = formData.get('text') as string
+    addTodo(text).then(() => getTodos().then(res => setTodos(res)))
   }
 
   useEffect(() => {
