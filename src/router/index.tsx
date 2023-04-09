@@ -4,7 +4,7 @@ import App from '../App'
 import NotFound from '../pages/NotFound'
 import SignIn from '../pages/SignIn'
 import SignUp from '../pages/SignUp'
-import TodoList from '../pages/TodoList'
+import Todo from '../pages/Todo'
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to='/signin' /> },
       { path: '/signin', element: <SignIn /> },
       { path: '/signup', element: <SignUp /> },
-      { path: '/todo', element: <TodoList /> },
+      { path: '/todo', element: <Todo /> },
     ],
   },
 ])
