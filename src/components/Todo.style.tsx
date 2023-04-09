@@ -4,10 +4,10 @@ const TodoContainer = styled.div`
   padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 32px;
   width: 100%;
   max-width: 480px;
-  height: 600px;
+  height: 640px;
   background: #fff;
   box-shadow: 0px 6px 15px rgba(47, 128, 237, 0.1);
 `
@@ -19,10 +19,21 @@ const Heading = styled.h1`
 `
 
 const List = styled.ul`
+  height: 420px;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5c6999;
+  }
 `
 
 const LogOutButton = styled.button`
