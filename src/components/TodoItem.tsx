@@ -19,7 +19,11 @@ const TodoItem = ({ item, handleDelete, handleUpdate }: TodoItemProps) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target
     setIsChecked(checked)
-    handleUpdate(id, modifiedInput, checked)
+    if (isModifyMode) {
+      handleUpdate(id, todo, checked)
+    } else {
+      handleUpdate(id, modifiedInput, checked)
+    }
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>
