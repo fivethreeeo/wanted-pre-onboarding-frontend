@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { TodoContainer, Heading, LogOutButton } from '../components/Todo.style'
+import { TodoContainer, Heading, List, LogOutButton } from '../components/Todo.style'
 import { getAccessTokenFromLocalStorage } from '../utils/accessTokenHandler'
 import { TodoType } from '../types/todo'
 import TodoForm from '../components/TodoForm'
-import TodoList from '../components/TodoList'
+import TodoItem from '../components/TodoItem'
 
 const getTodos = async () => {
   const response = await fetch('https://www.pre-onboarding-selection-task.shop/todos', {
@@ -50,7 +50,11 @@ const Todo = () => {
       <TodoContainer>
         <Heading>투두리스트</Heading>
         <TodoForm handleSubmit={todoSubmitHandler} />
-        <TodoList todos={todos} />
+        <List>
+          {todos.map(todo => (
+            <TodoItem key={todo.id} {...todo} />
+          ))}
+        </List>
       </TodoContainer>
       <LogOutButton>로그아웃</LogOutButton>
     </>

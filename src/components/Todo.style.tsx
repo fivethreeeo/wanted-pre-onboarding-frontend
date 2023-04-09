@@ -18,6 +18,13 @@ const Heading = styled.h1`
   text-align: center;
 `
 
+const List = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`
+
 const LogOutButton = styled.button`
   width: 80px;
   height: 36px;
@@ -25,4 +32,4 @@ const LogOutButton = styled.button`
   background: #5c6999;
 `
 
-export { TodoContainer, Heading, LogOutButton }
+export { TodoContainer, List, Heading, LogOutButton }
