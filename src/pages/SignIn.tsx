@@ -31,7 +31,7 @@ const signin = async (args: SignInRequest): Promise<SignInResult> => {
 const SignIn = () => {
   const navigate = useNavigate()
 
-  const SignInSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const signInSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
 
@@ -49,7 +49,7 @@ const SignIn = () => {
 
   return (
     <>
-      <SignForm title='로그인' handleSubmit={SignInSubmitHandler} />
+      <SignForm title='로그인' handleSubmit={signInSubmitHandler} />
       <Link to='/signup'>회원가입 하러가기</Link>
     </>
   )
