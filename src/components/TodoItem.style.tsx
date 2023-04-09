@@ -21,7 +21,7 @@ const Text = styled.span`
 `
 
 const InputText = styled.input`
-  margin-right: 16px;
+  margin: 0 16px;
   padding: 2px 8px;
   flex-grow: 1;
   font-size: 16px;
