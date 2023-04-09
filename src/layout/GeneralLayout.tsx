@@ -17,18 +17,16 @@ const GeneralLayout: React.FC<GeneralLayoutProps> = ({ children }) => {
 
   useEffect(() => {
     if (getAccessTokenFromLocalStorage()) {
-      if (pathname === '/signin' || pathname === '/signup') {
-        navigate('/todo')
-      }
+      ;(pathname === '/signin' || pathname === '/signup') && navigate('/todo')
     } else {
-      if (pathname === '/todo') {
-        navigate('/signin')
-      }
+      pathname === '/todo' && navigate('/signin')
     }
     setIsLoading(false)
-  }, [pathname, navigate])
+  }, [])
 
-  return <GeneralLayoutContainer>{isLoading ? '로딩중' : children}</GeneralLayoutContainer>
+  return (
+    <GeneralLayoutContainer>{isLoading ? '로그인 여부 확인 중' : children}</GeneralLayoutContainer>
+  )
 }
 
 export default GeneralLayout
