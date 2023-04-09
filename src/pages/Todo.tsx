@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TodoContainer, Heading, List, LogOutButton } from '../components/Todo.style'
 import { TodoType } from '../types/todo'
 import TodoForm from '../components/TodoForm'
 import TodoItem from '../components/TodoItem'
 import { getTodos, addTodo, deleteTodo, updateTodo } from '../api/todo'
+import { removeAccessTokenFromLocalStorage } from '../utils/accessTokenHandler'
 
 const Todo = () => {
   const [todos, setTodos] = useState<TodoType[]>([])
@@ -41,6 +43,12 @@ const Todo = () => {
     })
   }
 
+  const navigate = useNavigate()
+  const handlelogOutClick = () => {
+    removeAccessTokenFromLocalStorage()
+    navigate('/')
+  }
+
   useEffect(() => {
     getTodos().then(todos => setTodos(todos))
   }, [])
@@ -61,7 +69,7 @@ const Todo = () => {
           ))}
         </List>
       </TodoContainer>
-      <LogOutButton>로그아웃</LogOutButton>
+      <LogOutButton onClick={handlelogOutClick}>로그아웃</LogOutButton>
     </>
   )
 }

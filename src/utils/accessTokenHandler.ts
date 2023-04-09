@@ -10,3 +10,9 @@ export const getAccessTokenFromLocalStorage = (): string => {
   }
   return ''
 }
+
+export const removeAccessTokenFromLocalStorage = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('accessToken')
+  }
+}
