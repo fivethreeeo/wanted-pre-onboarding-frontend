@@ -30,6 +30,28 @@ const addTodo = async (text: string): Promise<TodoType> => {
 
   return addTodoRes.json()
 }
+
+const deleteTodo = async (id: number) => {
+  await fetch(`https://www.pre-onboarding-selection-task.shop/todos/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${getAccessTokenFromLocalStorage()}`,
+    },
+  })
+}
+
+const updateTodo = async (id: number, text: string, isCompleted: boolean) => {
+  await fetch(`https://www.pre-onboarding-selection-task.shop/todos/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getAccessTokenFromLocalStorage()}`,
+    },
+    body: JSON.stringify({
+      todo: text,
+      isCompleted: isCompleted,
+    }),
+  })
 }
 
 const Todo = () => {
@@ -41,6 +63,26 @@ const Todo = () => {
     const text = formData.get('text') as string
     addTodo(text).then(res => setTodos([...todos, res]))
   }
+
+  const todoDeleteHandler = (id: number) => {
+    deleteTodo(id).then(() => setTodos(todos.filter(item => item.id !== id)))
+  }
+
+  const todoUpdateHandler = (id: number, text: string, isCompleted: boolean) => {
+    updateTodo(id, text, isCompleted).then(() =>
+      setTodos(
+        todos.map(item => {
+          if (item.id === id) {
+            return {
+              ...item,
+              todo: text,
+              isCompleted: !isCompleted,
+            }
+          }
+          return item
+        })
+      )
+    )
   }
 
   useEffect(() => {
@@ -53,8 +95,13 @@ const Todo = () => {
         <Heading>투두리스트</Heading>
         <TodoForm handleSubmit={todoSubmitHandler} />
         <List>
-          {todos.map(todo => (
-            <TodoItem key={todo.id} {...todo} />
+          {todos.map(item => (
+            <TodoItem
+              key={item.id}
+              handleDelete={todoDeleteHandler}
+              handleUpdate={todoUpdateHandler}
+              item={item}
+            />
           ))}
         </List>
       </TodoContainer>
