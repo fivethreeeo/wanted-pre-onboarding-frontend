@@ -1,25 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { signup } from '../api/sign'
 import SignForm from '../components/SignForm'
-
-interface SignUpRequest {
-  email: string
-  password: string
-}
-
-type SignUpResult = 'success' | 'fail'
-
-const signup = async (args: SignUpRequest): Promise<SignUpResult> => {
-  // TODO: api 엔드포인트 변경 필요
-  const signUpRes = await fetch('https://www.pre-onboarding-selection-task.shop/auth/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(args),
-  })
-
-  return signUpRes.ok ? 'success' : 'fail'
-}
 
 const SignUp = () => {
   const navigate = useNavigate()
