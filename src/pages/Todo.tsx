@@ -1,12 +1,12 @@
-interface TodoProps {}
+import { TodoContainer, Heading, LogOutButton } from '../components/Todo.style'
 
-const Todo = ({}: TodoProps) => {
-  // TODO:
-
+const Todo = () => {
   return (
     <>
-      <div>TodoList</div>
-      <p>로그아웃</p>
+      <TodoContainer>
+        <Heading>투두리스트</Heading>
+      </TodoContainer>
+      <LogOutButton>로그아웃</LogOutButton>
     </>
   )
 }
